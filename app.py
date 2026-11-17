@@ -10,7 +10,8 @@ st.title("Smart AI Resume-to-JD Matcher & Skill Gap Analyzer")
 st.write("Compare your resume against any job description using TF-IDF, Hash-Set Skill Matching, and Gemini AI.")
 
 # Load API key safely from Streamlit Cloud Secrets
-client = genai.Client(api_key=os.environ.get("GEMINI_API_KEY", ""))
+api_key = st.secrets.get("GEMINI_API_KEY", os.environ.get("GEMINI_API_KEY", ""))
+client = genai.Client(api_key=api_key) if api_key else None
 
 TECH_SKILLS = {
     "python", "c", "c++", "java", "sql", "sqlite", "fastapi", "streamlit",
